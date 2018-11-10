@@ -1,10 +1,3 @@
-/*
-* <BCIT COMP4711 Assignment1 - Multiplayer Tank Game>
-* Copyright (C) Jake Jonghun Choi A00982751 - All Rights Reserved.
-* Unauthorized copying of this file, via any medium is strictly prohibited.
-* Written by Jake Jonghun Choi <jchoi179@my.bcit.ca>
-*/
-
 /**
  * Initialize the Express package and set static directories.
  */
@@ -15,6 +8,11 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const ModelTanks = require('./models/model_tanks');
 const GameLogic = require('./controllers/controller_gamelogic')
+
+/**
+ * Prepare the Mongo Database.
+ */
+var dbConnector = require('./controllers/controller_db');
 
 /**
  * For Heroku deployment.
@@ -206,5 +204,6 @@ app.get('/start_game', (req, res) => {
 http.listen(port, () => {
   console.log('Listening on *:' + port);
 });
+
 
 
