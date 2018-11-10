@@ -1,0 +1,46 @@
+/*
+* <BCIT COMP4711 Lab05 - Quiz Creator & DB>
+* Copyright (C) Jake Jonghun Choi A00982751 - All Rights Reserved.
+* Unauthorized copying of this file, via any medium is strictly prohibited.
+* Written by Jake Jonghun Choi <jchoi179@my.bcit.ca>
+*/
+
+.center {
+  text-align: center;
+  margin: auto;
+}
+
+input[type='radio'] { 
+  transform: scale(2); 
+}
+
+button {
+  margin: 3px 3px 3px 3px;
+}
+
+input {
+  margin: 3px 3px 3px 3px;
+}
+
+canvas {
+  border: 1px solid #000000;
+  background-color: white;
+  width: 100%;
+  height: auto;
+}
+
+.spinning-wheel {
+  border: 30px solid #f3f3f3; /* Light grey */
+  border-top: 30px solid #70a1ff;
+  border-right: 30px solid #7bed9f;
+  border-bottom: 30px solid #ff6b81;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  animation: spin 2s linear infinite; 
+} 
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
