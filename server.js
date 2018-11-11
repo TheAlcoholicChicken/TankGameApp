@@ -8,6 +8,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const ModelTanks = require('./models/model_tanks');
 const GameLogic = require('./controllers/controller_gamelogic')
+let userRoutes = require('./user_routes.js');
+app.use('', userRoutes);
 
 /**
  * Prepare the Mongo Database.
