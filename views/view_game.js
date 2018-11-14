@@ -246,6 +246,13 @@ class ViewGame {
     this.elementViewScreen.innerHTML = this.html;
 
     this.elementViewScreen.querySelector('#btn_restart').addEventListener('click', this.onClickButtonRestart);
+    
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "/user/increment_win");
+    xmlhttp.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+    xhttp.send(JSON.stringify({
+        user_name: data.player1Name
+    }));
   }
 }
 
