@@ -13,9 +13,7 @@ const GameLogic = require('./controllers/controller_gamelogic');
  * Prepare the Mongo Database.
  */
 var db = require('./controllers/controller_db');
-db.connect(() => {
-    console.log('connected');
-});
+
 /**
  * For Heroku deployment.
  */
@@ -217,4 +215,8 @@ http.listen(port, () => {
     console.log('Listening on *:' + port);
 });
 
-require('./user_routes.js')(app, db);
+
+db.connect(() => {
+    console.log('connected');
+    require('./user_routes.js')(app, db);
+});

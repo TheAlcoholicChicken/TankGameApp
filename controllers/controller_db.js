@@ -6,15 +6,9 @@ const uriString = 'mongodb://localhost:27017';
 const dbName = 'TankGame';
 
 let User = new mongoose.Schema({
-    user_id: String, // Computed when user signs up
     user_name: String,
     core_app_id: String, // Filled out when user signs in with core app's credentials.
     data: {}
-});
-
-let TankGameDbSchema = new mongoose.Schema({
-    token: String,
-    user: [User]
 });
 
 mongoose.connect(
@@ -26,7 +20,7 @@ mongoose.connect(
  * Export functions for the outside use.
  */
 module.exports = {
-    mainDb: () => mongoose.model('main', TankGameDbSchema),
+    User: mongoose.model('user', User),
     connect: callback => {
         mongoose.connection
             .once('open', () => {
