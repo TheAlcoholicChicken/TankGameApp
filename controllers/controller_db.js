@@ -2,7 +2,7 @@
  * Initialize the Mongo database and the model to store.
  */
 const mongoose = require('mongoose');
-const uriString = 'mongodb://localhost:27017';
+const uriString = process.env.DB_URL || 'mongodb://localhost:27017';
 const dbName = 'TankGame';
 
 let User = new mongoose.Schema({
