@@ -1,0 +1,18 @@
+
+Our app is hosted in:
+
+https://tank-game-web-dev.herokuapp.com
+
+
+The following is the request URL (POST):
+
+https://tank-game-web-dev.herokuapp.com/user/get_badge_message
+
+The following is the body of the request:
+
+{
+  "token": "aEKIDPR1WP2Y3MQW1iXDnXCLGus9F7uX4fZbw8dKv6BTkAfL4tok9h1qNoEsOnI",
+  "user_id": "oMfIsILS7C0o7n13psluF6GFcOrbJivVbRuPYFDnTsv"
+}
+
+
