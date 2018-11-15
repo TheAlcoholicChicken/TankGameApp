@@ -1,10 +1,9 @@
-
 Our app is hosted in:
 
 https://tank-game-web-dev.herokuapp.com
 
 
-The following is the request URL (POST):
+The following is the API request URL (POST):
 
 https://tank-game-web-dev.herokuapp.com/user/get_badge_message
 
@@ -15,4 +14,4 @@ The following is the body of the request:
   "user_id": "oMfIsILS7C0o7n13psluF6GFcOrbJivVbRuPYFDnTsv"
 }
 
-
+NOTE: The token param is used to verify the request is coming from a authorized source.
