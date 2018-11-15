@@ -4,7 +4,7 @@
     "main": "server.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "node server.js",
+        "start": "DB_URL=mongodb://user:password1@ds147044.mlab.com:47044 DB_NAME=heroku_9s5q48jd node server.js ",
         "dev": "nodemon server.js"
     },
     "author": "",

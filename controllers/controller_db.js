@@ -2,8 +2,10 @@
  * Initialize the Mongo database and the model to store.
  */
 const mongoose = require('mongoose');
-const uriString = 'mongodb://localhost:27017';
-const dbName = 'TankGame';
+const uriString = process.env.DB_URL || 'mongodb://localhost:27017';
+const dbName = process.env.DB_NAME || 'TankGame';
+const url = uriString + '/' + dbName;
+console.log(url);
 
 let User = new mongoose.Schema({
     user_name: String,
@@ -12,7 +14,7 @@ let User = new mongoose.Schema({
 });
 
 mongoose.connect(
-    uriString + '/' + dbName,
+    url,
     { useNewUrlParser: true }
 );
 
