@@ -33,6 +33,9 @@ module.exports = (app, db) => {
     app.post('/user/increment_win', authToken, (req, res) => {
         // update DB
         db.User.findOne({ user_name: req.body.user_name }, (err, user) => {
+            console.log("found");
+            console.log(user);
+            
             if (user) {
                 user.set({
                     data: {
@@ -41,6 +44,7 @@ module.exports = (app, db) => {
                     }
                 });
                 user.save(err => {
+                    console.log('updating done');
                     if (!err) {
                         res.status(200).end();
                     }
@@ -55,6 +59,8 @@ module.exports = (app, db) => {
                         }
                     },
                     err => {
+                        console.log("creation done");
+                        
                         if (!err) {
                             res.status(200).end();
                         }
