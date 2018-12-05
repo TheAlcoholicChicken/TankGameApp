@@ -23,6 +23,34 @@ Written by Jake Jonghun Choi <jchoi179@my.bcit.ca>
   <!-- Main Game Screen Element -->
   <div id="view_screen"></div>
 
+  <p>Badge book login:</p>
+  <input id="emailField" type="text" placeholder="email">
+  <input id="passwordField" type="password" placeholder="password">
+  <button class="btn btn-primary" onclick="login()">Submit</button>
+  <script>
+    function login() {
+      var xmlhttp = new XMLHttpRequest(); // new HttpRequest instance
+      console.log('login clicked');
+
+      xmlhttp.open("POST", "/blogin");
+      xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+
+      var url = window.location.href;
+
+      xmlhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          window.location.href = url + "start_game?user_name=" + document.getElementById('emailField').value;
+        
+        }
+      };
+
+      xmlhttp.send(JSON.stringify({
+        "email": document.getElementById('emailField').value, "password":
+          document.getElementById('passwordField').value
+      }));
+
+    }
+  </script>
   <!-- Javascripts -->
   <script src="./models/model_main.js"></script>
   <script src="./models/model_messages.js"></script>

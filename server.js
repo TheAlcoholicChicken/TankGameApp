@@ -8,7 +8,8 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 const ModelTanks = require('./models/model_tanks');
 const GameLogic = require('./controllers/controller_gamelogic');
-
+const __TOKEN = 'ArR5ALpkUHcYIYIRT7aPzocfkLE9onpwPEf7OTkKslL';
+var request = require('request');
 /**
  * Prepare the Mongo Database.
  */
@@ -206,6 +207,44 @@ app.get('/start_game', (req, res) => {
     console.log('Client Request: GET /start_game');
     tempPlayerName = req.query.user_name;
     res.sendFile(__dirname + '/views/game.html');
+});
+
+app.post('/blogin', function (req, res) {
+    // var db = req.db;
+    var myJSONObject = { user_email: req.body.email, password: req.body.password, token: __TOKEN };
+
+    request(
+        {
+            url: 'https://management-system-api.herokuapp.com/user/login',
+            method: 'POST',
+            json: true,
+            body: myJSONObject
+        },
+        function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                console.log(body);
+
+                isUser = false;
+
+                console.log(body);
+
+                db.User.create({
+                    user_name: myJSONObject.user_email,
+                    core_app_id: body.user_id,
+                    data: {
+                        score: Math.floor(Math.random() * 100)
+                    }
+                }, (err) => {
+                    if (err) res.status(400).json({});
+
+
+                    res.status(200).json({});
+                });
+            } else {
+                res.status(400).json({});
+            }
+        }
+    );
 });
 
 /**
