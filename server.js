@@ -32,7 +32,7 @@ app.use(express.static(__dirname + '/controllers'));
 /**
  * Determine how to parse the body of requests.
  */
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 /**
@@ -209,9 +209,13 @@ app.get('/start_game', (req, res) => {
     res.sendFile(__dirname + '/views/game.html');
 });
 
-app.post('/blogin', function (req, res) {
+app.post('/blogin', function(req, res) {
     // var db = req.db;
-    var myJSONObject = { user_email: req.body.email, password: req.body.password, token: __TOKEN };
+    var myJSONObject = {
+        user_email: req.body.email,
+        password: req.body.password,
+        token: __TOKEN
+    };
 
     request(
         {
@@ -220,7 +224,7 @@ app.post('/blogin', function (req, res) {
             json: true,
             body: myJSONObject
         },
-        function (error, response, body) {
+        function(error, response, body) {
             if (!error && response.statusCode == 200) {
                 console.log(body);
 
@@ -228,18 +232,30 @@ app.post('/blogin', function (req, res) {
 
                 console.log(body);
 
-                db.User.create({
+                db.User.findOne({
                     user_name: myJSONObject.user_email,
-                    core_app_id: body.user_id,
-                    data: {
-                        score: Math.floor(Math.random() * 100)
-                    }
-                }, (err) => {
+                    core_app_id: body.user_id
+                }, (err, u) => {
                     if (err) res.status(400).json({});
+                    
+                    if (u == null) {
+                        db.User.create(
+                            {
+                                user_name: myJSONObject.user_email,
+                                core_app_id: body.user_id,
+                                data: {
+                                    score: Math.floor(Math.random() * 100)
+                                }
+                            },
+                            err => {
+                                if (err) res.status(400).json({});
 
-
-                    res.status(200).json({});
+                                res.status(200).json({});
+                            }
+                        );
+                    }
                 });
+                
             } else {
                 res.status(400).json({});
             }
@@ -253,7 +269,6 @@ app.post('/blogin', function (req, res) {
 http.listen(port, () => {
     console.log('Listening on *:' + port);
 });
-
 
 db.connect(() => {
     console.log('connected');
