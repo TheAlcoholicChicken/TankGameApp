@@ -25,7 +25,7 @@ module.exports = (app, db) => {
             res.json({
                 userid: user_id,
                 badge_text:
-                    'User has won ' + user.data.wins + ' games'
+                    'User has won ' + user.data.score + ' games'
             });
             res.end();
         });
