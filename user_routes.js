@@ -24,7 +24,8 @@ module.exports = (app, db) => {
         db.User.findOne({ core_app_id: user_id }, (err, user) => {
             res.json({
                 userid: user_id,
-                msg: 'User has won ' + user.data.wins + ' games'
+                badge_text:
+                    'User has won ' + user.data.wins + ' games'
             });
             res.end();
         });
